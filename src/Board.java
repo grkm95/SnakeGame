@@ -16,12 +16,12 @@ import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener {
 
-    private final int B_WIDTH = 500;
-    private final int B_HEIGHT = 500;
-    private final int DOT_SIZE = 10;
-    private final int ALL_DOTS = 900;
-    private final int RAND_POS = 29;
-    private final int DELAY = 140;
+    private final int B_WIDTH   = 500;
+    private final int B_HEIGHT  = 500;
+    private final int DOT_SIZE  = 10;
+    private final int ALL_DOTS  = 900;
+    private final int RAND_POS  = 29;
+    private final int DELAY     = 140;
 
     private final int x[] = new int[ALL_DOTS];
     private final int y[] = new int[ALL_DOTS];
@@ -30,11 +30,11 @@ public class Board extends JPanel implements ActionListener {
     private int apple_x;
     private int apple_y;
 
-    private boolean leftDirection = false;
-    private boolean rightDirection = true;
-    private boolean upDirection = false;
-    private boolean downDirection = false;
-    private boolean inGame = true;
+    private boolean leftDirection   = false;
+    private boolean rightDirection  = true;
+    private boolean upDirection     = false;
+    private boolean downDirection   = false;
+    private boolean inGame          = true;
 
     private Timer timer;
     private Image ball;
@@ -42,7 +42,6 @@ public class Board extends JPanel implements ActionListener {
     private Image head;
 
     public Board() {
-
         initBoard();
     }
 
@@ -59,14 +58,14 @@ public class Board extends JPanel implements ActionListener {
 
     private void loadImages() {
 
-        ImageIcon iid = new ImageIcon("/home/gorkem/IdeaProjects/untitled/resources/apple.png");
-        ball = iid.getImage();
+        ImageIcon iid   = new ImageIcon("/home/gorkem/IdeaProjects/untitled/resources/apple.png");
+        ball            = iid.getImage();
 
-        ImageIcon iia = new ImageIcon("/home/gorkem/IdeaProjects/untitled/resources/dot.png");
-        apple = iia.getImage();
+        ImageIcon iia   = new ImageIcon("/home/gorkem/IdeaProjects/untitled/resources/dot.png");
+        apple           = iia.getImage();
 
-        ImageIcon iih = new ImageIcon("/home/gorkem/IdeaProjects/untitled/resources/head.png");
-        head = iih.getImage();
+        ImageIcon iih   = new ImageIcon("/home/gorkem/IdeaProjects/untitled/resources/head.png");
+        head            = iih.getImage();
     }
 
     private void initGame() {
@@ -87,16 +86,13 @@ public class Board extends JPanel implements ActionListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         doDrawing(g);
     }
 
     private void doDrawing(Graphics g) {
 
         if (inGame) {
-
             g.drawImage(apple, apple_x, apple_y, this);
-
             for (int z = 0; z < dots; z++) {
                 if (z == 0) {
                     g.drawImage(head, x[z], y[z], this);
@@ -104,20 +100,15 @@ public class Board extends JPanel implements ActionListener {
                     g.drawImage(ball, x[z], y[z], this);
                 }
             }
-
             Toolkit.getDefaultToolkit().sync();
-
-        } else {
-
-            gameOver(g);
-        }
+        } else gameOver(g);
     }
 
     private void gameOver(Graphics g) {
 
-        String msg = "Game Over";
-        Font small = new Font("Helvetica", Font.BOLD, 14);
-        FontMetrics metr = getFontMetrics(small);
+        String msg          = "Game Over";
+        Font small          = new Font("Helvetica", Font.BOLD, 14);
+        FontMetrics metr    = getFontMetrics(small);
 
         g.setColor(Color.white);
         g.setFont(small);
@@ -189,10 +180,10 @@ public class Board extends JPanel implements ActionListener {
 
     private void locateApple() {
 
-        int r = (int) (Math.random() * RAND_POS);
+        int r   = (int) (Math.random() * RAND_POS);
         apple_x = ((r * DOT_SIZE));
 
-        r = (int) (Math.random() * RAND_POS);
+        r       = (int) (Math.random() * RAND_POS);
         apple_y = ((r * DOT_SIZE));
     }
 
@@ -217,27 +208,27 @@ public class Board extends JPanel implements ActionListener {
             int key = e.getKeyCode();
 
             if ((key == KeyEvent.VK_LEFT) && (!rightDirection)) {
-                leftDirection = true;
-                upDirection = false;
-                downDirection = false;
+                leftDirection   = true;
+                upDirection     = false;
+                downDirection   = false;
             }
 
             if ((key == KeyEvent.VK_RIGHT) && (!leftDirection)) {
-                rightDirection = true;
-                upDirection = false;
-                downDirection = false;
+                rightDirection  = true;
+                upDirection     = false;
+                downDirection   = false;
             }
 
             if ((key == KeyEvent.VK_UP) && (!downDirection)) {
-                upDirection = true;
-                rightDirection = false;
-                leftDirection = false;
+                upDirection     = true;
+                rightDirection  = false;
+                leftDirection   = false;
             }
 
             if ((key == KeyEvent.VK_DOWN) && (!upDirection)) {
-                downDirection = true;
-                rightDirection = false;
-                leftDirection = false;
+                downDirection   = true;
+                rightDirection  = false;
+                leftDirection   = false;
             }
         }
     }
