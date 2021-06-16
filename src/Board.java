@@ -94,11 +94,8 @@ public class Board extends JPanel implements ActionListener {
         if (inGame) {
             g.drawImage(apple, apple_x, apple_y, this);
             for (int z = 0; z < dots; z++) {
-                if (z == 0) {
-                    g.drawImage(head, x[z], y[z], this);
-                } else {
-                    g.drawImage(ball, x[z], y[z], this);
-                }
+                if (z == 0) g.drawImage(head, x[z], y[z], this);
+                else g.drawImage(ball, x[z], y[z], this);
             }
             Toolkit.getDefaultToolkit().sync();
         } else gameOver(g);
@@ -118,7 +115,6 @@ public class Board extends JPanel implements ActionListener {
     private void checkApple() {
 
         if ((x[0] == apple_x) && (y[0] == apple_y)) {
-
             dots++;
             locateApple();
         }
@@ -131,51 +127,31 @@ public class Board extends JPanel implements ActionListener {
             y[z] = y[(z - 1)];
         }
 
-        if (leftDirection) {
-            x[0] -= DOT_SIZE;
-        }
+        if (leftDirection) x[0] -= DOT_SIZE;
 
-        if (rightDirection) {
-            x[0] += DOT_SIZE;
-        }
+        if (rightDirection)  x[0] += DOT_SIZE;
 
-        if (upDirection) {
-            y[0] -= DOT_SIZE;
-        }
+        if (upDirection) y[0] -= DOT_SIZE;
 
-        if (downDirection) {
-            y[0] += DOT_SIZE;
-        }
+        if (downDirection) y[0] += DOT_SIZE;
     }
 
     private void checkCollision() {
 
         for (int z = dots; z > 0; z--) {
 
-            if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
-                inGame = false;
-            }
+            if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) inGame = false;
         }
 
-        if (y[0] >= B_HEIGHT) {
-            inGame = false;
-        }
+        if (y[0] >= B_HEIGHT) inGame = false;
 
-        if (y[0] < 0) {
-            inGame = false;
-        }
+        if (y[0] < 0) inGame = false;
 
-        if (x[0] >= B_WIDTH) {
-            inGame = false;
-        }
+        if (x[0] >= B_WIDTH) inGame = false;
 
-        if (x[0] < 0) {
-            inGame = false;
-        }
+        if (x[0] < 0) inGame = false;
 
-        if (!inGame) {
-            timer.stop();
-        }
+        if (!inGame) timer.stop();
     }
 
     private void locateApple() {
@@ -191,12 +167,10 @@ public class Board extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (inGame) {
-
             checkApple();
             checkCollision();
             move();
         }
-
         repaint();
     }
 
