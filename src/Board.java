@@ -17,6 +17,8 @@ import javax.swing.Timer;
 public class Board extends JPanel implements ActionListener {
 
     private final int B_WIDTH   = 500;
+    // private final int B_WIDTH   = 500;
+    private final int test = 500;
     private final int B_HEIGHT  = 500;
     private final int DOT_SIZE  = 10;
     private final int ALL_DOTS  = 900;
